@@ -14,7 +14,11 @@ export default class Search {
             // Format Date
             this.parseDate();
             // Format Province
-            if (this.parseProvince()) this.parseCountry();
+            this.parseProvince();
+            console.log(this.country);
+            // Format Country
+            this.parseCountry();
+            console.log(this.country);
 
             this.slug = slug;
         } catch (error) {
@@ -23,7 +27,68 @@ export default class Search {
     }
 
     parseCountry() {
-        
+        if (!this.provinces) {
+            const newCountry = [];
+            this.country.forEach((cur) => {
+                const {
+                    Active,
+                    Confirmed,
+                    Country,
+                    CountryCode,
+                    Date,
+                    Deaths,
+                    Lat,
+                    Lon,
+                    Recovered,
+                } = cur;
+                newCountry.push({
+                    Country,
+                    CountryCode,
+                    Active,
+                    Confirmed,
+                    Recovered,
+                    Deaths,
+                    Date,
+                    Lat,
+                    Lon,
+                });
+            });
+
+            this.country = newCountry;
+        } else {
+            const newCountry = [];
+
+            const {Country,CountryCode} = this.country[this.country.length - 1];
+
+            this.dates.forEach(date => {
+
+                let Active=0;
+                let Confirmed = 0;
+                let Recovered=0;
+                let Deaths=0;
+
+                this.country.forEach(cur => {
+                    if(cur.Date === date && cur.Province !== '' && cur.Province !== 'Global'){
+                        Active += cur.Active;
+                        Confirmed += cur.Confirmed;
+                        Recovered += cur.Recovered;
+                        Deaths += cur.Deaths;
+                    }
+                });
+
+                newCountry.push({
+                    Country,
+                    CountryCode,
+                    Active,
+                    Confirmed,
+                    Recovered,
+                    Deaths,
+                    Date : date,
+                })
+            });
+
+            this.country = newCountry;
+        }
     }
 
     parseProvince() {
@@ -53,6 +118,5 @@ export default class Search {
         });
 
         this.dates = dates;
-        console.log(dates);
     }
 }

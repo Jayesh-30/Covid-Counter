@@ -52,7 +52,7 @@
     };
     var createResultsList = function createResultsList(renderResults) {
         var resultsList = document.createElement(renderResults.element);
-        resultsList.setAttribute('id', select.resultsList);
+        resultsList.setAttribute('class', select.resultsList);
         if (renderResults.container) {
             renderResults.container(resultsList);
         }

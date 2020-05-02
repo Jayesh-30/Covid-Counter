@@ -47,6 +47,9 @@ export default (autocomplete) => {
             result.innerHTML = 'No Results';
             document.querySelector('.search__list').appendChild(result);
         },
-        onSelection: () => {},
+        onSelection: (data) => {
+            elements.searchInput.value = data.selection.value;
+            elements.searchForm.submit();
+        },
     });
 };

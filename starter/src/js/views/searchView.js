@@ -7,17 +7,13 @@ export const clearInput = () => (elements.searchInput.value = '');
 
 export const clearResults = () => (elements.country.innerHTML = '');
 
-export const renderCountry = (country, slug, dates, provinces, date = dates[dates.length-1]) => {
+export const renderCountry = (country, slug, dates, date = dates[dates.length - 1]) => {
     clearResults();
 
     let current, index;
     // Date will be always given
 
-    let province = '';
-    // If there is provinces then provice set to Global
-    if (provinces) province = 'Global';
-
-    index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
+    index = country.findIndex((cur) => cur.Date == date);
 
     // At this moment index is available to us
     current = country[index];
@@ -77,9 +73,6 @@ export const renderCountry = (country, slug, dates, provinces, date = dates[date
     `;
 
     elements.country.insertAdjacentHTML('afterbegin', markup);
-
-    // Adding Provinces
-    if (provinces.length > 0) addProvinces(provinces, province);
 };
 
 export const getSlug = (countries, countryName) => {

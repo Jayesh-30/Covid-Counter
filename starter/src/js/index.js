@@ -58,14 +58,11 @@ const controlSearch = async () => {
             // Getting result from API
             await state.search.getResult(slug);
 
-            console.log(state.search.country);
-
             // Render to UI
             searchView.renderCountry(
                 state.search.country,
                 state.search.slug,
-                state.search.dates,
-                state.search.provinces
+                state.search.dates
             );
             // Highlight Selected
             initView.highlightSelected(slug);
@@ -118,12 +115,10 @@ const controlCountry = (event) => {
     // Date Change button
     if (event.target.matches('.button__date,.button__date *')) {
         const date = event.target.closest('.button__date').dataset.date;
-        console.log('Date Changed');
         searchView.renderCountry(
             state.search.country,
             state.search.slug,
             state.search.dates,
-            state.search.provinces,
             date
         );
     }
