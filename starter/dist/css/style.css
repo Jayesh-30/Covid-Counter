@@ -221,29 +221,25 @@ body {
     margin-bottom: 0.2rem;
     transition: all 0.5s;
 }
-
 .countries__link:link,
 .countries__link:visited {
     display: inline-block;
     width: 100%;
-    /* background-color: var(--color-grey-light); */
-    color: var(--color-primary-dark);
     text-decoration: none;
     transition: all 0.4s;
+    border-bottom: 1px solid var(--color-grey-light);
 }
 
 .countries__link:hover,
 .countries__link:active {
     transform: translateY(-0.1rem);
     background-color: var(--color-primary-dark);
-    color: var(--color-white);
     cursor: cell;
 }
 
 .countries__link--active:link,
 .countries__link--active:visited {
     background-color: var(--color-primary-dark);
-    color: var(--color-white);
     cursor: not-allowed;
 }
 
@@ -256,19 +252,39 @@ body {
 
 .countries__name {
     display: inline-block;
+    color: var(--color-primary-dark);
     font-size: 150%;
     font-weight: var(--font-weight--meduim);
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    word-spacing: 0.4rem;
+    word-spacing: 0.3rem;
     padding: 0.5rem;
 }
 
 .countries__cases {
     display: inline-block;
+    color: var(--color-grey-dark);
     padding-left: 0.5rem;
     padding-bottom: 0.1rem;
     font-size: 110%;
+}
+
+.countries__link:hover .countries__name,
+.countries__link:active .countries__name{
+    color : var(--color-white);
+}
+.countries__link:hover .countries__cases,
+.countries__link:active .countries__cases {
+    color : var(--color-grey-light);
+}
+
+.countries__link--active:link .countries__name,
+.countries__link--active:visited .countries__name{
+    color : var(--color-white)
+}
+.countries__link--active:link .countries__cases,
+.countries__link--active:visited .countries__cases{
+    color : var(--color-grey-light);
 }
 
 /* Pagination */
