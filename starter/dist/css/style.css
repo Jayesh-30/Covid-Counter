@@ -145,6 +145,22 @@ body {
     margin: 0.5rem;
 }
 
+/* Autocomplete */
+
+
+.search__list{
+
+}
+.search__result{
+
+}
+.search__highlighted{
+
+}
+.search__selected{
+    
+}
+
 
 /* Loader */
 @keyframes rotate {
@@ -205,7 +221,7 @@ body {
     font-size: var(--font-size--meduim);
     font-weight: 500;
     margin: 1rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .countries__list {

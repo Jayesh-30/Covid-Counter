@@ -1,8 +1,9 @@
 // Controller
-import { elements, sortingDescending, renderLoader, clearLoader,currentDate } from './views/base';
+import { elements, sortingDescending, renderLoader, clearLoader } from './views/base';
 
 import Init from './models/Init';
 import Search from './models/Search';
+import Autocomplete from './models/Autocomplete';
 import * as initView from './views/initView';
 import * as searchView from './views/searchView';
 
@@ -25,6 +26,9 @@ const controlInit = async () => {
 
         // Sorting result on bases of total cases
         state.init.countries.sort(sortingDescending);
+
+        // Autocomplete
+        Autocomplete(state.init.autocomplete);
 
         // console.log(state.init.countries);
 
@@ -57,16 +61,19 @@ const controlSearch = async () => {
             console.log(state.search.country);
 
             // Render to UI
-            searchView.renderCountry(state.search.country, state.search.slug,state.search.dates, state.search.provinces);
-
+            searchView.renderCountry(
+                state.search.country,
+                state.search.slug,
+                state.search.dates,
+                state.search.provinces
+            );
             // Highlight Selected
             initView.highlightSelected(slug);
 
             // Prepare UI for result
             clearLoader();
 
-             // Control event of Province   
-
+            // Control event of Province
         } catch (error) {
             console.log(error);
         }
@@ -112,9 +119,15 @@ const controlCountry = (event) => {
     if (event.target.matches('.button__date,.button__date *')) {
         const date = event.target.closest('.button__date').dataset.date;
         console.log('Date Changed');
-        searchView.renderCountry(state.search.country, state.search.slug,state.search.dates, state.search.provinces,date);
+        searchView.renderCountry(
+            state.search.country,
+            state.search.slug,
+            state.search.dates,
+            state.search.provinces,
+            date
+        );
     }
-    // Like Button 
+    // Like Button
 };
 
 // Adding all the events
