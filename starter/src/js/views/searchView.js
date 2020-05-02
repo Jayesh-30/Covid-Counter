@@ -26,7 +26,6 @@ const addProvinces = (provinces,province) => {
 export const renderCountry = (country, slug, dates, provinces, date = currentDate(), province = '') => {
     clearResults();
 
-    console.log(...provinces);
     let current, index;
     // Date and Province will be given always
 
