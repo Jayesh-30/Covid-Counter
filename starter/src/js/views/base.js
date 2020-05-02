@@ -27,22 +27,14 @@ export const formatNumber = (num) => {
     return num;
 };
 
-export const formatDate = (date) => {
-    const newDate = date.replace('T00:00:00Z','');
+export const formatDate = (dateString) => {
+    const newDate = dateString.replace('T00:00:00Z','');
     const [year, month, day] = newDate.split('-');
     return {day,month,year};
 };
 
-export const getDate = (date) => {
-    return `${date.day}/${date.month}/${date.year}`;
+export const getDate = (dateObj) => {
+    return `${dateObj.day}/${dateObj.month}/${dateObj.year}`;
 }
+
 export const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1, str.length)}`;
-
-
-export const currentDate = () => {
-    let date = new Date();
-    date = date.toLocaleDateString(this, { day: '2-digit', month: '2-digit', year: 'numeric' });
-    const [month, day, year] = date.split('/');
-
-    return `${day}/${month}/${year}`;
-};

@@ -14,42 +14,45 @@ export default class Search {
             // Format Date
             this.parseDate();
             // Format Province
-            this.parseProvince();
-            
+            if (this.parseProvince()) this.parseCountry();
 
             this.slug = slug;
         } catch (error) {
             console.log(error);
         }
     }
-    
-    parseProvince() {
-        const provinces = [];
 
-        let province;
-        this.country.forEach((cur) => {
-            province = cur.Province;
-            // province must not be empty and it must not be present in provinces before
-            if(province !== '' && provinces.indexOf(province) === -1)
-            provinces.push(province);
-        });
+    parseCountry() {
         
-        this.provinces = provinces;
     }
-    
-    parseDate() {
-        this.country.forEach((cur) => (cur.Date = getDate(formatDate(cur.Date))));
 
+    parseProvince() {
+        let provinces = false;
+
+        this.country.forEach((cur) => {
+            const province = cur.Province;
+            // Provinces are present
+            if (province !== '') provinces = true;
+        });
+
+        this.provinces = provinces;
+        return this.provinces;
+    }
+
+    parseDate() {
+        // Formatting Date to dd/mm/yyyy
+        this.country.forEach((cur) => (cur.Date = getDate(formatDate(cur.Date))));
 
         const dates = [];
         let date;
 
+        // Removing duplicate value and parsing only unique value
         this.country.forEach((cur) => {
             date = cur.Date;
-            if(dates.indexOf(date) === -1)
-                dates.push(date);
+            if (dates.indexOf(date) === -1) dates.push(date);
         });
 
         this.dates = dates;
+        console.log(dates);
     }
 }

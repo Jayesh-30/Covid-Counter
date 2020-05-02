@@ -7,57 +7,18 @@ export const clearInput = () => (elements.searchInput.value = '');
 
 export const clearResults = () => (elements.country.innerHTML = '');
 
-const addProvinces = (provinces,province) => {
-    let select = document.querySelector('.province__select');
-    let option;
-
-    // Select will not add more if there is already present
-    provinces.forEach((cur) => {
-        option = document.createElement('option');
-
-        option.value = cur;
-        option.text = cur;
-        select.add(option);
-    });
-
-    select.value = province; 
-};
-
-export const renderCountry = (country, slug, dates, provinces, date = currentDate(), province = '') => {
+export const renderCountry = (country, slug, dates, provinces, date = dates[dates.length-1]) => {
     clearResults();
 
     let current, index;
-    // Date and Province will be given always
+    // Date will be always given
 
-    // If province is not given then global but provinces are present
-    if (province == '') {
-        // Finding Global
-        index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
-        province = 'Global';
-        // Global Data is unavailable
-        if (index == -1) {
-            let newProvince;
-            let max = -1;
-            country.forEach((cur) => {
-                if (cur.Date == date && cur.Confirmed > max) {
-                    newProvince = cur.Province;
-                    max = cur.Confirmed;
-                }
-            });
-            province = newProvince;
-            index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
-        }
-        else {
-            provinces.unshift('Global');
-        }
-    }
-    // If province is given
-    else {
-        index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
-    }
-    console.log(index);
-    if(index == -1)
-        index = 0;
+    let province = '';
+    // If there is provinces then provice set to Global
+    if (provinces) province = 'Global';
+
+    index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
+
     // At this moment index is available to us
     current = country[index];
 
@@ -113,21 +74,12 @@ export const renderCountry = (country, slug, dates, provinces, date = currentDat
                             ${buttonView.renderDateButtons(country, dates, date)}
                     </div>
                 </div>
-
-                <div class="country__province ${provinces.length > 0 ? '' : 'non-province'}">
-                    <ion-icon name="pricetag-sharp" class="list__icon list__icon--pro"></ion-icon>
-                    <p>Province : ${current.Province}</p>
-
-                    <select class="province__select">
-                        
-                     </select>
-                </div>
     `;
 
     elements.country.insertAdjacentHTML('afterbegin', markup);
 
     // Adding Provinces
-    if (provinces.length > 0) addProvinces(provinces,province);
+    if (provinces.length > 0) addProvinces(provinces, province);
 };
 
 export const getSlug = (countries, countryName) => {

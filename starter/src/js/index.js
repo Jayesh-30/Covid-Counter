@@ -112,18 +112,10 @@ const controlCountry = (event) => {
     if (event.target.matches('.button__date,.button__date *')) {
         const date = event.target.closest('.button__date').dataset.date;
         console.log('Date Changed');
-        // Also need to pass province again
         searchView.renderCountry(state.search.country, state.search.slug,state.search.dates, state.search.provinces,date);
     }
     // Like Button 
 };
-
-// // Province change event
-// const controlProvince = (event) => {
-//     console.log('Province Changed');
-//     const province = document.querySelector('.province__select').value;
-//     searchView.renderCountry(state.search.country, state.search.slug,state.search.dates, state.search.provinces,currentDate(),province);
-// };
 
 // Adding all the events
 const eventHandler = () => {

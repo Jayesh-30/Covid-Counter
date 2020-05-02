@@ -14,11 +14,11 @@
     --font-size--large: 2.5rem;
     --font-size--extralarge: 3rem;
 
-    --font-weight--extrasmall : 200;
+    --font-weight--extrasmall: 100;
     --font-weight--small: 300;
     --font-weight--meduim: 400;
-    --font-weight--large: 600;
-    --font-weight--extralarge: 700;
+    --font-weight--large: 700;
+    --font-weight--extralarge: 900;
 
 }
 
@@ -48,6 +48,8 @@ html {
 
 body {
     font-family: 'Libre Franklin', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
+    /* font-family: 'Roboto Mono', monospace; */
     font-weight: var(--font-weight--small);
     line-height: 1.6;
     /* color :  */
@@ -226,24 +228,22 @@ body {
 .countries__link:visited {
     display: inline-block;
     width: 100%;
-    /* background-color: var(--color-grey-light); */
     color: var(--color-primary-dark);
     text-decoration: none;
     transition: all 0.4s;
+    border-bottom: 1px solid var(--color-grey-light);
 }
 
 .countries__link:hover,
 .countries__link:active {
     transform: translateY(-0.1rem);
     background-color: var(--color-primary-dark);
-    color: var(--color-white);
     cursor: cell;
 }
 
 .countries__link--active:link,
 .countries__link--active:visited {
     background-color: var(--color-primary-dark);
-    color: var(--color-white);
     cursor: not-allowed;
 }
 
@@ -260,16 +260,37 @@ body {
     font-weight: var(--font-weight--meduim);
     text-transform: uppercase;
     letter-spacing: 0.1rem;
-    word-spacing: 0.4rem;
+    word-spacing: 0.3rem;
     padding: 0.5rem;
 }
 
 .countries__cases {
     display: inline-block;
+    color: var(--color-grey-dark);
     padding-left: 0.5rem;
     padding-bottom: 0.1rem;
     font-size: 110%;
 }
+
+.countries__link:hover .countries__name,
+.countries__link:active .countries__name{
+    color : var(--color-white);
+}
+.countries__link:hover .countries__cases,
+.countries__link:active .countries__cases {
+    color : var(--color-grey-light);
+}
+
+.countries__link--active:link .countries__name,
+.countries__link--active:visited .countries__name{
+    color : var(--color-white)
+}
+.countries__link--active:link .countries__cases,
+.countries__link--active:visited .countries__cases{
+    color : var(--color-grey-light);
+}
+
+
 
 /* Pagination */
 .countries__button {
@@ -365,7 +386,6 @@ Country Heading
     left: 50%;
     transform: translate(-50%, 20%) skewY(-6deg);
     color: var(--color-white);
-    font-weight: var(--font-weight--large);
     font-size: var(--font-size--large);
     text-transform: uppercase;
     width: 62.5%;
@@ -374,6 +394,7 @@ Country Heading
 
 .country__name {
     padding: 1.75rem 0;
+    font-weight: var(--font-weight--large);
     background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
 }
 
@@ -446,13 +467,9 @@ Country Summary
 }
 
 /*
-Date and Province
+Date
 */
-.non-province {
-    display: none !important;
-}
 
-.country__province,
 .country__date {
     padding: 2rem 6rem;
     font-size: var(--font-size--small);
@@ -466,7 +483,6 @@ Date and Province
     text-align: center;
 }
 
-.country__province p,
 .country__date p {
     letter-spacing: 0.1rem;
     word-spacing: 0.2rem;
@@ -476,13 +492,12 @@ Date and Province
     text-align: left;
 }
 
-.country__province p:hover,
 .country__date p:hover {
     transform: translateY(-0.2rem);
 }
 
 /*
-Date Button and Province Select
+Date Button
 */
 .buttons__date {
     width: 80%;
@@ -490,10 +505,11 @@ Date Button and Province Select
     padding-top: 0.3rem;
 }
 
-.button__date--prev,.button__date--next{
+.button__date--prev,
+.button__date--next {
     opacity: 0;
     /* visibility and display are binary */
-    transition : opacity 0.4s,transform 0.4s, box-shadow 0.1s;
+    transition: opacity 0.4s, transform 0.4s, box-shadow 0.1s;
 
 }
 
@@ -507,7 +523,8 @@ Date Button and Province Select
     transform: translateY(2rem) translateX(-4rem);
 }
 
-.country:hover .button__date--prev,.country:hover .button__date--next {
+.country:hover .button__date--prev,
+.country:hover .button__date--next {
     opacity: 1;
     transform: translate(0);
 }
@@ -530,31 +547,6 @@ Date Button and Province Select
 .button__date span {
     padding: 0.5rem 1rem;
 }
-
-.province__select {
-    width: 45%;
-    margin: 0 auto;
-    padding: 1rem 1.5rem;
-    padding-left: 3rem;
-    font-size: var(--font-size--small);
-    font-weight: var(--font-weight--small);
-    color: var(--color-primary-dark);
-    border: none;
-}
-
-.province__select:focus {
-    outline: none;
-    border :none;
-}
-
-.province__select option {
-    color : var(--color-primary-dark);
-    font-size : var(--font-size--small);
-    font-weight : var(--font-weight--extrasmall);
-    margin : 0.2rem;
-    padding : 0.5rem;
-}
-
 
 /*
 Icons
@@ -626,8 +618,7 @@ Icons
     fill: #ecb7bf;
 }
 
-.list__icon--date,
-.list__icon--pro {
+.list__icon--date {
     height: 3rem;
     width: 3rem;
 }
@@ -636,9 +627,6 @@ Icons
     fill: #fcba6c;
 }
 
-.list__icon--pro {
-    fill: #e9f20c;
-}
 
 .date__icon {
     height: 2.75rem;
