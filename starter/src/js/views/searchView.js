@@ -26,10 +26,11 @@ const addProvinces = (provinces,province) => {
 export const renderCountry = (country, slug, dates, provinces, date = currentDate(), province = '') => {
     clearResults();
 
+    console.log(...provinces);
     let current, index;
     // Date and Province will be given always
 
-    // If province is not given then global
+    // If province is not given then global but provinces are present
     if (province == '') {
         // Finding Global
         index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
@@ -55,7 +56,9 @@ export const renderCountry = (country, slug, dates, provinces, date = currentDat
     else {
         index = country.findIndex((cur) => cur.Date == date && cur.Province == province);
     }
-
+    console.log(index);
+    if(index == -1)
+        index = 0;
     // At this moment index is available to us
     current = country[index];
 
