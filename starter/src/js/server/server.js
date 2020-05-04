@@ -20,7 +20,20 @@ app.get('/country/*', (req, res) => {
     const reqUrl = url.parse(req.url, true);
     const reqCountry = reqUrl.pathname.split('/').pop();
 
-    const available = ['brazil', 'france', 'germany', 'india', 'italy', 'russia', 'spain', 'turkey', 'united-kingdom'];
+    const available = [
+        'brazil',
+        'canada',
+        'china',
+        'france',
+        'germany',
+        'india',
+        'italy',
+        'russia',
+        'spain',
+        'turkey',
+        'united-kingdom',
+        'united-states',
+    ];
     if (available.indexOf(reqCountry) != -1) {
         fs.readFile(`${__dirname}/data/country/${reqCountry}.json`, 'utf-8', (err, countryData) => {
             res.writeHead(200, {
@@ -28,9 +41,7 @@ app.get('/country/*', (req, res) => {
             });
             res.end(countryData);
         });
-    }
-    else
-    res.end('Data Not Available');
+    } else res.end('Data Not Available');
 });
 
 app.listen(5000, () => {

@@ -47,6 +47,7 @@ const controlInit = async () => {
 // Search Controller
 const controlSearch = async () => {
     const slug = window.location.hash.replace('#', '');
+    console.log(slug);
     if (slug) {
         // Creating an new Search if it is not present
         if (!state.search) state.search = new Search();

@@ -221,5 +221,19 @@
         "Recovered": 120832,
         "Active": 85069,
         "Date": "2020-04-28T00:00:00Z"
+    },
+    {
+        "Country": "Spain",
+        "CountryCode": "ES",
+        "Province": "",
+        "City": "",
+        "CityCode": "",
+        "Lat": "40.46",
+        "Lon": "-3.75",
+        "Confirmed": 217466,
+        "Deaths": 25264,
+        "Recovered": 118902,
+        "Active": 73300,
+        "Date": "2020-05-04T00:00:00Z"
     }
 ]
