@@ -6,6 +6,7 @@ import Search from './models/Search';
 import Autocomplete from './models/Autocomplete';
 import * as initView from './views/initView';
 import * as searchView from './views/searchView';
+import * as graphView from './views/graphView';
 
 // Global Data
 const state = {};
@@ -58,19 +59,17 @@ const controlSearch = async () => {
             // Getting result from API
             await state.search.getResult(slug);
 
-            // Render to UI
-            searchView.renderCountry(
-                state.search.country,
-                state.search.slug,
-                state.search.dates
-            );
-            // Highlight Selected
-            initView.highlightSelected(slug);
+            if (state.search.country) {
+                // Render to UI
+                searchView.renderCountry(state.search.country, state.search.slug, state.search.dates);
+                // Highlight Selected
+                initView.highlightSelected(slug);
 
-            // Prepare UI for result
-            clearLoader();
+                // Prepare UI for result
+                clearLoader();
 
-            // Control event of Province
+                // Control event of Province
+            }
         } catch (error) {
             console.log(error);
         }
@@ -110,19 +109,37 @@ const controlQuery = () => {
     }
 };
 
+// Control Date
+const controlDate = (event) => {
+    const date = event.target.closest('.button__date').dataset.date;
+    searchView.renderCountry(state.search.country, state.search.slug, state.search.dates, date);
+};
+
+// Control Graph
+const controlGraph = (event) => {
+    // Prepare UI for changes
+    searchView.clearResults();
+    graphView.changeDark();
+
+    // Render Results
+    graphView.renderResults(state.search.country, state.search.dates);
+};
+
 // Control Country
 const controlCountry = (event) => {
     // Date Change button
-    if (event.target.matches('.button__date,.button__date *')) {
-        const date = event.target.closest('.button__date').dataset.date;
-        searchView.renderCountry(
-            state.search.country,
-            state.search.slug,
-            state.search.dates,
-            date
-        );
-    }
+    if (event.target.matches('.button__date,.button__date *')) controlDate(event);
+
     // Like Button
+
+    // Graph Button
+    if (event.target.matches('.button__graph,.button__graph *')) controlGraph(event);
+
+    // Go Back
+    if (event.target.matches('.button__go-back,.button__go-back *')) {
+        graphView.changeLight();
+        searchView.renderCountry(state.search.country, state.search.slug, state.search.dates);
+    }
 };
 
 // Adding all the events

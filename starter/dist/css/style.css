@@ -5,8 +5,12 @@
 
     --color-grey-superlight: #f6f6f6;
     --color-grey-light: #eee;
-    --color-grey-dark: #555;
+    --color-grey-meduim :#ddd;
+    --color-grey-dark: #555555;
     --color-white: rgb(255, 255, 255);
+
+    --graph-background-dark: #060818;
+    --graph-background-light: #0e1726;
 
     --font-size--extrasmall: 1rem;
     --font-size--small: 1.5rem;
@@ -156,13 +160,14 @@ body {
     list-style: none;
     font-size: var(--font-size--small);
     /* background-color: var(--color-white); */
-    background-image: linear-gradient(to left top, var(--color-primary-light), var(--color-primary-dark));
+    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
     overflow: hidden;
     border-radius: 0 0 1rem 1rem;
 
 }
 
-.search__result ,.no_result{
+.search__result,
+.no_result {
 
     text-transform: capitalize;
     padding: 1rem;
@@ -170,22 +175,27 @@ body {
     color: var(--color-white);
     font-weight: var(--font-weight--meduim);
     letter-spacing: 0.1rem;
-    border-bottom: 0.1rem solid var(--color-grey-light); 
+    border-bottom: 0.1rem solid var(--color-grey-light);
     transition: all 0.3s ease-in-out;
 }
-.search__result:first-child,.no_result{
+
+.search__result:first-child,
+.no_result {
     padding-top: 1.5rem;
 }
-.search__result:last-child,.no_result{
+
+.search__result:last-child,
+.no_result {
     border: 0;
 }
 
-.search__result:hover{
+.search__result:hover {
     cursor: cell;
     border-left: 0.5rem solid var(--color-grey-superlight);
     border-right: 0.5rem solid var(--color-grey-superlight);
 }
-.no_result:hover{
+
+.no_result:hover {
     cursor: cell;
 }
 
@@ -400,7 +410,8 @@ body {
     width: 70%;
     color: var(--color-grey-dark);
     margin: 0.5rem;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .country::-webkit-scrollbar {
@@ -529,7 +540,8 @@ Country Summary
 Date
 */
 
-.country__date {
+.country__date,
+.country__graph {
     padding: 2rem 6rem;
     font-size: var(--font-size--small);
     font-weight: var(--font-weight--meduim);
@@ -542,23 +554,27 @@ Date
     text-align: center;
 }
 
-.country__date p {
+.country__date p,
+.country__graph p {
     letter-spacing: 0.1rem;
     word-spacing: 0.2rem;
     padding: 1rem;
     align-self: end;
     display: inline-block;
     text-align: left;
+    transition: 0.1s all;
 }
 
-.country__date p:hover {
+.country__date p:hover,
+.country__graph p:hover {
     transform: translateY(-0.2rem);
 }
 
 /*
 Date Button
 */
-.buttons__date {
+.buttons__date,
+.buttons__graph {
     width: 80%;
     margin: 0 auto;
     padding-top: 0.3rem;
@@ -568,7 +584,7 @@ Date Button
 .button__date--next {
     opacity: 0;
     /* visibility and display are binary */
-    transition: opacity 0.4s, transform 0.4s, box-shadow 0.1s;
+    transition: opacity 0.4s, transform 0.4s, box-shadow 0.2s;
 
 }
 
@@ -588,7 +604,22 @@ Date Button
     transform: translate(0);
 }
 
-.button__date {
+/* Button Graph */
+.button__graph {
+    opacity: 0;
+    transform: translateY(-2rem);
+    transition: opacity 0.4s, transform 0.4s, box-shadow 0.2s;
+    margin: 0 auto;
+}
+
+
+.country:hover .button__graph {
+    opacity: 1;
+    transform: translate(0);
+}
+
+.button__date,
+.button__graph {
     color: var(--color-white);
     background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
     border-radius: 2rem;
@@ -598,13 +629,108 @@ Date Button
     justify-content: center;
 }
 
-.button__date:hover {
+.button__date:hover,
+.button__graph:hover {
     cursor: cell;
     box-shadow: 0 0.2rem 1rem 0.2rem var(--color-shadow);
 }
 
-.button__date span {
+.button__date span,
+.button__graph span {
     padding: 0.5rem 1rem;
+}
+
+.button__graph span {
+    padding-top: 0.75rem;
+}
+
+/* Button go back */
+.buttons__go-back {
+    background-color: var(--color-white);
+    padding: 1rem 3rem;
+    padding-top: 2rem;
+}
+
+.button__go-back {
+    color: var(--color-white);
+    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.button__go-back:hover {
+    cursor: cell;
+    box-shadow: 0 0.2rem 1rem 0.2rem var(--color-shadow);
+}
+
+.button__go-back span {
+    padding: 0.5rem 1rem;
+}
+
+/* Graph */
+
+.row {
+    margin: 0.75rem;
+    padding: 0.5rem;
+}
+.col{
+}
+
+canvas {
+    margin: 0;
+    padding: 0;
+}
+
+.country.dark {
+    background-color: var(--graph-background-dark);
+}
+.graph {
+}
+
+/* Bar Graphs Confirmed and Deaths */
+
+
+.graph--Confirmed,.graph--Deaths {
+    background-color: var(--graph-background-light);
+    padding: 1.25rem 0.75rem;
+    border-radius: 1rem;
+}
+
+/* Pie Graph */
+.graph--pie {
+    border-radius: 1rem;
+    background-color: var(--graph-background-light);
+    position: relative;
+}
+
+#graph__pie {}
+
+.graph--pie__content {
+    color: var(--color-grey-light);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.graph--pie__content h3 {
+    font-weight: var(--font-weight--meduim);
+    font-size: var(--font-size--large);
+    color : var(--color-grey-dark);
+    letter-spacing: 0.1rem;
+}
+
+.graph--pie__content p {
+    font-weight: var(--font-weight--meduim);
+    font-size: var(--font-size--small);
+    color: var(--color-grey-meduim);
+    letter-spacing: 0.2rem;
 }
 
 /*
@@ -686,6 +812,10 @@ Icons
     fill: #fcba6c;
 }
 
+.list__icon--graph {
+    fill: #777;
+}
+
 
 .date__icon {
     height: 2.75rem;
@@ -693,9 +823,20 @@ Icons
     fill: currentColor;
 }
 
+.graph__icon,
+.go-back__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: currentColor;
+}
+
+.graph__icon:last-child {
+    transform: rotate(180deg);
+}
+
 /* Text Color */
 /*   
-    background-image: linear-gradient(to right bottom,var(--color-primary-light), var(--color-primary-dark));
+    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
     background-clip: text;
     -webkit-background-clip: text;
     fill-color : transparent;
@@ -718,7 +859,7 @@ Scrollbar
 }
 
 ::-webkit-scrollbar-track {
-    background-image: linear-gradient(to top, var(--color-primary-light), var(--color-primary-dark));
+    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
     box-shadow: inset 0 0 0.6rem var(--color-shadow);
 }
 

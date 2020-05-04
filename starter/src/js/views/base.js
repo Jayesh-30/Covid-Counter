@@ -28,13 +28,26 @@ export const formatNumber = (num) => {
 };
 
 export const formatDate = (dateString) => {
-    const newDate = dateString.replace('T00:00:00Z','');
+    const newDate = dateString.replace('T00:00:00Z', '');
     const [year, month, day] = newDate.split('-');
-    return {day,month,year};
+    return { day, month, year };
 };
 
 export const getDate = (dateObj) => {
     return `${dateObj.day}/${dateObj.month}/${dateObj.year}`;
-}
+};
 
 export const capitalize = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1, str.length)}`;
+
+export const nFormatter = (cases) => {
+
+    if (cases >= 1e12) return +(cases / 1e12).toFixed(1) + 'T';
+    else
+    if (cases >= 1e9) return +(cases / 1e9).toFixed(1) + 'B';
+    else 
+    if (cases >= 1e6) return +(cases / 1e6).toFixed(1) + 'M';
+    else
+    if (cases >= 1e3) return +(cases / 1e3).toFixed(1) + 'K';
+    else
+    return cases;
+};

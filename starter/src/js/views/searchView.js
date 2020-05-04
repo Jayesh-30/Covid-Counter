@@ -70,6 +70,19 @@ export const renderCountry = (country, slug, dates, date = dates[dates.length - 
                             ${buttonView.renderDateButtons(country, dates, date)}
                     </div>
                 </div>
+
+                <div class="country__graph">
+                <ion-icon name="stats-chart-sharp" class="list__icon list__icon--graph"></ion-icon>
+                <p>View Graph</p>
+
+                <div class="buttons__graph">
+                    <button class="button__graph">
+                        <ion-icon name="pie-chart-sharp" class="graph__icon"></ion-icon>
+                        <span>Show Graph</span>
+                        <ion-icon name="pie-chart-sharp" class="graph__icon"></ion-icon>
+                    </button>
+                </div>
+            </div>
     `;
 
     elements.country.insertAdjacentHTML('afterbegin', markup);

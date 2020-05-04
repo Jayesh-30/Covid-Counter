@@ -2,7 +2,10 @@ import axios from 'axios';
 
 export default class Init {
     constructor() {
-        this.query = 'https://api.covid19api.com/summary';
+        // Production
+        // this.query = 'https://api.covid19api.com/summary';
+        // Testing
+        this.query = 'http://localhost:5000/summary';
     }
 
     async getSummary() {
@@ -15,19 +18,21 @@ export default class Init {
             // Parse countries
             this.parseCountries();
 
+            // console.log(this.countries);
+
             this.global = result.data.Global;
         } catch (error) {
             console.log(error);
         }
     }
 
-    parseCountries(){           
+    parseCountries() {
         // Lowercase of Country and storing it to autocomplete
-        this.countries.forEach(cur => cur.Country = cur.Country.toLowerCase());
+        this.countries.forEach((cur) => (cur.Country = cur.Country.toLowerCase()));
 
         // Filliing it
         const autocomplete = [];
-        this.countries.forEach(cur => autocomplete.push(cur.Country));
+        this.countries.forEach((cur) => autocomplete.push(cur.Country));
         this.autocomplete = autocomplete;
     }
 }

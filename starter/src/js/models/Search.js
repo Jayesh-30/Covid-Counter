@@ -4,23 +4,31 @@ import { formatDate, getDate } from '../views/base';
 
 export default class Search {
     constructor() {
-        this.query = `https://api.covid19api.com/live/country/`;
+        // Production
+        // this.query = `https://api.covid19api.com/live/country/`;
+        // Testing
+        this.query = `http://localhost:5000/country/`;
     }
     async getResult(slug) {
         try {
-            const result = await axios(`${this.query}${slug}`);
-            this.country = result.data;
+            const { data } = await axios(`${this.query}${slug}`);
 
-            // Format Date
-            this.parseDate();
-            // Format Province
-            this.parseProvince();
-            console.log(this.country);
-            // Format Country
-            this.parseCountry();
-            console.log(this.country);
+            if (data != 'Data Not Available') {
+                this.country = data;
 
-            this.slug = slug;
+                // Format Date
+                this.parseDate();
+                // Format Province
+                this.parseProvince();       
+                console.log('Original');
+                console.log(this.country);
+                // Format Country
+                this.parseCountry();
+                console.log('Prased');
+                console.log(this.country);
+
+                this.slug = slug;
+            }
         } catch (error) {
             console.log(error);
         }
@@ -30,17 +38,7 @@ export default class Search {
         if (!this.provinces) {
             const newCountry = [];
             this.country.forEach((cur) => {
-                const {
-                    Active,
-                    Confirmed,
-                    Country,
-                    CountryCode,
-                    Date,
-                    Deaths,
-                    Lat,
-                    Lon,
-                    Recovered,
-                } = cur;
+                const { Country, CountryCode, Active, Confirmed, Recovered, Deaths, Date, Lat, Lon } = cur;
                 newCountry.push({
                     Country,
                     CountryCode,
@@ -58,17 +56,16 @@ export default class Search {
         } else {
             const newCountry = [];
 
-            const {Country,CountryCode} = this.country[this.country.length - 1];
+            const { Country, CountryCode } = this.country[this.country.length - 1];
 
-            this.dates.forEach(date => {
-
-                let Active=0;
+            this.dates.forEach((date) => {
+                let Active = 0;
                 let Confirmed = 0;
-                let Recovered=0;
-                let Deaths=0;
+                let Recovered = 0;
+                let Deaths = 0;
 
-                this.country.forEach(cur => {
-                    if(cur.Date === date && cur.Province !== '' && cur.Province !== 'Global'){
+                this.country.forEach((cur) => {
+                    if (cur.Date === date && cur.Province !== '' && cur.Province !== 'Global') {
                         Active += cur.Active;
                         Confirmed += cur.Confirmed;
                         Recovered += cur.Recovered;
@@ -83,8 +80,8 @@ export default class Search {
                     Confirmed,
                     Recovered,
                     Deaths,
-                    Date : date,
-                })
+                    Date: date,
+                });
             });
 
             this.country = newCountry;
