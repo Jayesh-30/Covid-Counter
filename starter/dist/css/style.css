@@ -687,12 +687,19 @@ canvas {
     background-color: var(--graph-background-dark);
 }
 .graph {
+    padding: 2rem 0 ;
 }
 
 /* Bar Graphs Confirmed and Deaths */
 
 
 .graph--Confirmed,.graph--Deaths {
+    background-color: var(--graph-background-light);
+    padding: 1.25rem 0.75rem;
+    border-radius: 1rem;
+}
+
+.graph--DailyNew {
     background-color: var(--graph-background-light);
     padding: 1.25rem 0.75rem;
     border-radius: 1rem;

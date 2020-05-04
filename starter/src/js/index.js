@@ -53,6 +53,7 @@ const controlSearch = async () => {
 
         // Prepare Loader
         searchView.clearResults();
+        graphView.changeLight();
         renderLoader(elements.country);
 
         try {
