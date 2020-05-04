@@ -5,9 +5,9 @@ import { formatDate, getDate } from '../views/base';
 export default class Search {
     constructor() {
         // Production
-        // this.query = `https://api.covid19api.com/live/country/`;
+        this.query = `https://api.covid19api.com/live/country/`;
         // Testing
-        this.query = `http://localhost:5000/country/`;
+        // this.query = `http://localhost:5000/country/`;
     }
     async getResult(slug) {
         try {
@@ -19,7 +19,7 @@ export default class Search {
                 // Format Date
                 this.parseDate();
                 // Format Province
-                this.parseProvince();       
+                this.parseProvince();
                 console.log('Original');
                 console.log(this.country);
                 // Format Country
@@ -36,6 +36,9 @@ export default class Search {
 
     parseCountry() {
         if (!this.provinces) {
+            // If Provinces are not present
+            console.log('No Provinces');
+
             const newCountry = [];
             this.country.forEach((cur) => {
                 const { Country, CountryCode, Active, Confirmed, Recovered, Deaths, Date, Lat, Lon } = cur;
@@ -54,22 +57,39 @@ export default class Search {
 
             this.country = newCountry;
         } else {
+            // If Provinces are present
+            console.log('Provinces');
             const newCountry = [];
 
             const { Country, CountryCode } = this.country[this.country.length - 1];
+            // Search for Global
+            let global = false;
+            this.country.forEach((cur) => {
+                if (cur.Province == '') global = true;
+            });
 
             this.dates.forEach((date) => {
                 let Active = 0;
                 let Confirmed = 0;
                 let Recovered = 0;
                 let Deaths = 0;
-
                 this.country.forEach((cur) => {
-                    if (cur.Date === date && cur.Province !== '' && cur.Province !== 'Global') {
-                        Active += cur.Active;
-                        Confirmed += cur.Confirmed;
-                        Recovered += cur.Recovered;
-                        Deaths += cur.Deaths;
+                    if (cur.Date === date) {
+                        if (global && cur.Province == '') {
+                            console.log('Global');
+                            // Will be executed if global data is present with province to be ''
+                            Active += cur.Active;
+                            Confirmed += cur.Confirmed;
+                            Recovered += cur.Recovered;
+                            Deaths += cur.Deaths;
+                        } else if (!global) {
+                            console.log('Adding');
+                            // Will be executed if global data is absent
+                            Active += cur.Active;
+                            Confirmed += cur.Confirmed;
+                            Recovered += cur.Recovered;
+                            Deaths += cur.Deaths;
+                        }
                     }
                 });
 

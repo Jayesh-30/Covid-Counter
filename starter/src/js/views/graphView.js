@@ -102,8 +102,8 @@ const generateBar = (dataCases, dates, typeOfData) => {
     let ele, col, col_light;
     if (typeOfData === 'DailyNew') {
         ele = 'graph__bar--DailyNew';
-        col = '#007bff';
-        col_light = 'rgba(0, 123, 255, 0.65)';
+        col = '#c97c0d';
+        col_light = 'rgb(201, 124, 13,0.8)';
     }
     const ctx = document.getElementById(ele).getContext('2d');
     const type = 'bar';
@@ -111,7 +111,7 @@ const generateBar = (dataCases, dates, typeOfData) => {
         labels: dates,
         datasets: [
             {
-                label: 'Daily New Cases',
+                label: typeOfData,
                 data: dataCases,
                 borderColor: col,
                 hoverBorderColor: 'rgba(255,255,255,0.6)',
@@ -365,8 +365,8 @@ const generatePieChart = (country) => {
             {
                 label: '# of Cases',
                 data: [country.Active, country.Recovered, country.Deaths],
-                backgroundColor: ['#5c1ac3', '#e2a03f', '#e7515a'],
-                hoverBackgroundColor: ['#742de3', '#e8b66b', '#ed7e84'],
+                backgroundColor: ['#5c1ac3', '#0ba360 ', '#e7515a'],
+                hoverBackgroundColor: ['#742de3', '#3cba92', '#ed7e84'],
                 borderColor: ['#0e1726', '#0e1726', '#0e1726'],
                 hoverBorderColor: ['rgba(255,255,255,0.4)', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.4)'],
                 borderWidth: 5,

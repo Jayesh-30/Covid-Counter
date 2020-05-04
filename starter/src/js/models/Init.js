@@ -3,9 +3,9 @@ import axios from 'axios';
 export default class Init {
     constructor() {
         // Production
-        // this.query = 'https://api.covid19api.com/summary';
+        this.query = 'https://api.covid19api.com/summary';
         // Testing
-        this.query = 'http://localhost:5000/summary';
+        // this.query = 'http://localhost:5000/summary';
     }
 
     async getSummary() {
