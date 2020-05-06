@@ -191,8 +191,16 @@ const controlCountry = (event) => {
 };
 
 // Persistance of likes
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes());
+window.addEventListener('load', () => {
+    state.likes = new Likes();
+    // Restore likes
+    state.likes.readStorage();
+    // Toggle button
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+
+    // Render all like in UI
+    state.likes.likes.forEach( like => likesView.renderLike(like));
+});
 
 // Adding all the events
 const eventHandler = () => {
