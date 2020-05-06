@@ -142,7 +142,6 @@ const controlGraph = (event) => {
 
 // Control Like
 const controlLike = () => {
-    console.log('Like');
     if (!state.likes) state.likes = new Likes();
     const currentSlug = state.search.slug;
 
@@ -228,4 +227,4 @@ const init = () => {
 init();
 
 // Testing
-window.state = state;
+// window.state = state;

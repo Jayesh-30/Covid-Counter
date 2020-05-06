@@ -74,8 +74,7 @@ body {
 }
 
 .container {
-    width: 80vw;
-    height: 125vh;
+    width: 80%;
     margin: 4vw auto;
     background-color: var(--color-white);
     border-radius: 0.6rem;
@@ -88,7 +87,6 @@ body {
 }
 
 .header {
-    height: 12.5%;
     background-color: var(--color-grey-light);
     color: var(--color-grey-dark);
     display: flex;
@@ -108,13 +106,12 @@ body {
 
 /* Search */
 .search {
-    height: 45%;
     flex: 0 0 40%;
     padding: 1rem;
 }
 
 .search__form {
-    height: 100%;
+    height: 5rem;
     width: 100%;
     font-size: var(--font-size--meduim);
     display: flex;
@@ -163,8 +160,8 @@ body {
 .search__list {
     position: absolute;
     top: 100%;
-    left: 2%;
-    width: 50%;
+    left: 3.5%;
+    width: 60%;
     z-index: 1;
     margin: 0.5rem;
     margin-top: 0.2rem;
@@ -238,14 +235,14 @@ body {
 
 /* Likes */
 .likes {
-    height: 100%;
-    flex: 0 0 10%;
+    height: 10.5rem;
+    width: 12.5rem;
     position: relative;
 }
 
 
 /* Field */
-.likes__hover{
+.likes__hover {
     height: 100%;
     width: 100%;
     display: flex;
@@ -254,7 +251,8 @@ body {
     color: var(--color-primary-dark);
     transition: all 0.2s;
 }
-.likes__hover:hover{
+
+.likes__hover:hover {
     background-color: var(--color-grey-meduim);
 }
 
@@ -265,12 +263,12 @@ body {
 
 /* Dropdown */
 .likes__panel {
-    opacity: 0; 
+    opacity: 0;
     visibility: hidden;
     position: absolute;
     right: 0;
     top: 100%;
-    width: 250%;
+    width: 275%;
     z-index: 1;
 }
 
@@ -292,23 +290,24 @@ body {
     border-right: 0;
 }
 
-.likes__list li{
+.likes__list li {
     border-bottom: 0.1rem solid var(--color-grey-light);
     transition: all 0.3s ease-in-out;
 }
-.likes__list li:last-child{
+
+.likes__list li:last-child {
     border: 0;
 }
-.likes__list li:hover{
+
+.likes__list li:hover {
     border-left: 0.5rem solid var(--color-primary-dark);
     border-right: 0.5rem solid var(--color-primary-dark);
 }
 
-.likes__link:link,.likes__link:visited {
+.likes__link:link,
+.likes__link:visited {}
 
-}
-
-.likes__data{
+.likes__data {
     padding: 0.75rem;
     padding-left: 2rem;
 }
@@ -334,9 +333,7 @@ body {
 
 /* Main */
 .main {
-    height: 87.5%;
     margin: 0.1rem;
-    /* padding : 0.5rem; */
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -347,22 +344,23 @@ body {
     width: 30%;
     background-color: var(--color-white);
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 
 /* Countries List */
 .countries__heading {
-    height: 5%;
     display: inline-block;
     color: var(--color-grey-dark);
     font-size: var(--font-size--meduim);
     font-weight: 500;
-    margin: 1rem;
-    margin-top: 1.5rem;
+    margin: 1.5rem 1rem;
 }
 
 .countries__list {
-    height: 85%;
+    padding: 0.5rem 0;
+    flex: 1;
     list-style: none;
     text-align: left;
     overflow-y: scroll;
@@ -416,13 +414,15 @@ body {
     letter-spacing: 0.1rem;
     word-spacing: 0.3rem;
     padding: 0.5rem;
+    padding-bottom: 0.2rem;
 }
 
 .countries__cases {
     display: inline-block;
     color: var(--color-grey-dark);
     padding-left: 0.5rem;
-    padding-bottom: 0.1rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
     font-size: var(--font-size--extrasmall);
 }
 
@@ -450,9 +450,7 @@ body {
 
 /* Pagination */
 .countries__button {
-    height: 4%;
     padding: 0.5rem;
-    padding-top: 1rem;
     color: var(--color-primary-dark);
 }
 
@@ -494,7 +492,7 @@ body {
 
 /* Country  */
 .country {
-    width: 70%;
+    flex: 0 0 70%;
     color: var(--color-grey-dark);
     margin: 0.5rem;
     overflow-x: hidden;
@@ -509,7 +507,7 @@ body {
 Country Heading
 */
 .country__fig {
-    height: 40%;
+    height: 32.5rem;
     position: relative;
     transform: scale(1.01) translateY(-0.5rem);
     transform-origin: top;
@@ -559,6 +557,7 @@ Country Heading
     position: absolute;
     bottom: 10%;
     right: 5%;
+
     background-color: transparent;
     color: var(--color-white);
 
@@ -629,7 +628,7 @@ Date
 
 .country__date,
 .country__graph {
-    padding: 2rem 6rem;
+    padding: 1.75rem 6rem;
     font-size: var(--font-size--small);
     font-weight: var(--font-weight--meduim);
     color: var(--color-primary-dark);
@@ -735,7 +734,6 @@ Date Button
 .buttons__go-back {
     background-color: var(--color-white);
     padding: 1rem 3rem;
-    padding-top: 2rem;
 }
 
 .button__go-back {
@@ -760,10 +758,26 @@ Date Button
 
 .row {
     margin: 0.75rem;
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.col {}
+.col {
+    margin: 0.5rem;
+}
+/* For 2 block */
+.span-1-of-2{
+    width: 50%;
+}
+/* For 3 block */
+.span-1-of-3 {
+    width: 35%;
+}
+.span-2-of-3{
+    width: 65%;
+}
 
 canvas {
     margin: 0;
@@ -796,20 +810,22 @@ canvas {
 
 /* Pie Graph */
 .graph--pie {
+    padding: 0.5rem;
     border-radius: 1rem;
     background-color: var(--graph-background-light);
     position: relative;
 }
 
-#graph__pie {}
+#graph__pie {
+}
 
 .graph--pie__content {
     color: var(--color-grey-light);
-    position: absolute;
+    /* position: absolute;
     top: 45%;
-    left: 50%;
+    left: 50%; 
     transform: translate(-50%, -50%);
-
+        */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -963,3 +979,22 @@ Scrollbar
     border-radius: 1rem;
     background-color: var(--color-white);
 }
+
+
+/* Media Queries */
+/* Big tablet to 1200px (widths smaller taht the 1140px row) */
+@media only screen and (max-width: 1200px) {}
+
+
+/* Small tablet to big tablet: from 768px to 1023px */
+@media only screen and (max-width: 1023px) {}
+
+
+
+/* Small phones to small tablets: from 481px to 767px */
+@media only screen and (max-width: 767px) {}
+
+
+
+/* Small phones: from 0 to 480px */
+@media only screen and (max-width: 480px) {}

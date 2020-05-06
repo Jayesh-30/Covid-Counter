@@ -37,9 +37,9 @@ export const renderResults = (country, dates) => {
         <div class="row">
             <div class="col span-1-of-3">
                 <div class="graph--pie">
+                    <div class="graph--pie__content" ></div>
                     <canvas id="graph__pie" width="100" height="100">
                     </canvas>
-                    <div class="graph--pie__content" ></div>
                 </div>
             </div>
             <div class="col span-2-of-3">
@@ -63,7 +63,7 @@ export const renderResults = (country, dates) => {
     generatePieChart(country[country.length - 1]);
     // Daily New Bar Graph
     const dailyNew = getDailyActive(Confirmed);
-    generateBar(dailyNew, newDates.slice(1,newDates.length), 'DailyNew');
+    generateBar(dailyNew, newDates.slice(1, newDates.length), 'DailyNew');
 
     console.log(country);
     console.log(dates);
@@ -72,12 +72,10 @@ export const renderResults = (country, dates) => {
 const getDailyActive = (array) => {
     const newArray = [];
     for (let index = 1; index < array.length; index++) {
-        const prev = array[index-1];
+        const prev = array[index - 1];
         const cur = array[index];
-        if(cur-prev >= 0)
-        newArray.push(cur-prev);
-        else
-        newArray.push(0);
+        if (cur - prev >= 0) newArray.push(cur - prev);
+        else newArray.push(0);
     }
     return newArray;
 };
@@ -123,7 +121,7 @@ const generateBar = (dataCases, dates, typeOfData) => {
                 borderWidth: '2',
                 hoverBorderWidth: '4',
                 backgroundColor: col_light,
-                barPercentage : 0.8
+                barPercentage: 0.8,
             },
         ],
     };
@@ -175,7 +173,7 @@ const generateBar = (dataCases, dates, typeOfData) => {
             duration: 2000,
         },
         scales: {
-            offset : true,
+            offset: true,
             yAxes: [
                 {
                     ticks: {
