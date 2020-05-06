@@ -74,7 +74,10 @@ const getDailyActive = (array) => {
     for (let index = 1; index < array.length; index++) {
         const prev = array[index-1];
         const cur = array[index];
+        if(cur-prev >= 0)
         newArray.push(cur-prev);
+        else
+        newArray.push(0);
     }
     return newArray;
 };

@@ -179,9 +179,9 @@ body {
     text-transform: capitalize;
     padding: 1rem;
     padding-left: 1.5rem;
-    color: var(--color-white);
-    font-weight: var(--font-weight--meduim);
-    letter-spacing: 0.1rem;
+    color : var(--color-white);
+    font-weight: var(--font-weight--large);
+    letter-spacing: 0.15rem;
     border-bottom: 0.1rem solid var(--color-grey-light);
     transition: all 0.3s ease-in-out;
 }
@@ -207,7 +207,8 @@ body {
 }
 
 .search__highlighted {
-    color: rgba(0, 0, 0, 0.75);
+    color: var(--color-grey-light);
+    font-weight: var(--font-weight--meduim);
 }
 
 .search__selected {}

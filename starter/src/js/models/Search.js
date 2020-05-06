@@ -4,10 +4,12 @@ import { formatDate, getDate } from '../views/base';
 
 export default class Search {
     constructor() {
+        // NOTE:
         // Production
-        this.query = `https://api.covid19api.com/live/country/`;
-        // Testing
-        // this.query = `http://localhost:5000/country/`;
+        this.query =
+            window.location.hostname === 'localhost'
+                ? `http://localhost:5000/country/`
+                : `https://api.covid19api.com/live/country/`;
     }
     async getResult(slug) {
         try {

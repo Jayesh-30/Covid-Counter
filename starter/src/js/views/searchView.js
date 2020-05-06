@@ -1,4 +1,5 @@
 import { elements, formatNumber, currentDate } from './base';
+import { CountUp } from 'countup.js';
 import * as buttonView from './buttonView';
 
 export const getInput = () => elements.searchInput.value.toLowerCase();
@@ -19,12 +20,11 @@ export const renderCountry = (country, slug, dates, date = dates[dates.length - 
     current = country[index];
 
     console.log(current);
-
     const markup = `
                 <figure class="country__fig">
-                    <img src="img/compass.jpg" alt="Compass" class="country__img">
+                    <img src="img/compass-min.jpg" alt="Compass" class="country__img">
 
-                    <div class="country__heading">
+                    <div class="country__heading" id="count">
                         <h3 class="country__name">${current.Country}</h3>
                     </div>
                     <button class="country__like">
@@ -45,19 +45,19 @@ export const renderCountry = (country, slug, dates, date = dates[dates.length - 
                         </li>
                         <li class="country__summary--item">
                             <ion-icon name="briefcase-sharp" class="list__icon list__icon--total"></ion-icon>
-                            <p>Confirmed Cases : ${formatNumber(current.Confirmed)}</p>
+                            <p>Confirmed Cases : <span id="countup--Confirmed">${formatNumber(current.Confirmed)}</span>  </p>
                         </li>
                         <li class="country__summary--item">
                             <ion-icon name="heart-dislike-sharp" class=" list__icon list__icon--death"></ion-icon>
-                            <p>Deaths : ${formatNumber(current.Deaths)}</p>
+                            <p>Deaths : <span id="countup--Deaths">${formatNumber(current.Deaths)}</span>  </p>
                         </li>
                         <li class="country__summary--item">
                             <ion-icon name="bandage-sharp" class="list__icon list__icon--recover"></ion-icon>
-                            <p>Recovered : ${formatNumber(current.Recovered)}</p>
+                            <p>Recovered : <span id="countup--Recovered">${formatNumber(current.Recovered)}</span>  </p>
                         </li>
                         <li class="country__summary--item">
                             <ion-icon name="pulse-sharp" class="list__icon list__icon--active"></ion-icon>
-                            <p>Active : ${formatNumber(current.Active)}</p>
+                            <p>Active : <span id="countup--Active">${formatNumber(current.Active)}</span>  </p>
                         </li>
                     </ul>
                 </div>
@@ -86,6 +86,22 @@ export const renderCountry = (country, slug, dates, date = dates[dates.length - 
     `;
 
     elements.country.insertAdjacentHTML('afterbegin', markup);
+
+    displayCount(current);
+};
+
+const displayCount = (current) => {
+    const options = {};
+    const countup_Confirmed = new CountUp(document.getElementById('countup--Confirmed'), current.Confirmed);
+    const countup_Deaths = new CountUp(document.getElementById('countup--Deaths'), current.Deaths);
+    const countup_Recovered = new CountUp(document.getElementById('countup--Recovered'), current.Recovered);
+    const countup_Active = new CountUp(document.getElementById('countup--Active'), current.Active);
+
+    
+    countup_Confirmed.start();
+    countup_Deaths.start();
+    countup_Recovered.start();
+    countup_Active.start();
 };
 
 export const getSlug = (countries, countryName) => {
