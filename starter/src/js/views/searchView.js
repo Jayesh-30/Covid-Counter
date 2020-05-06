@@ -8,7 +8,7 @@ export const clearInput = () => (elements.searchInput.value = '');
 
 export const clearResults = () => (elements.country.innerHTML = '');
 
-export const renderCountry = (country, slug, dates, date = dates[dates.length - 1]) => {
+export const renderCountry = (country, slug, isLiked ,dates, date = dates[dates.length - 1]) => {
     clearResults();
 
     let current, index;
@@ -28,7 +28,7 @@ export const renderCountry = (country, slug, dates, date = dates[dates.length - 
                         <h3 class="country__name">${current.Country}</h3>
                     </div>
                     <button class="country__like">
-                        <ion-icon name="heart-outline" class="like__icon"></ion-icon>
+                        <ion-icon name="heart${isLiked ? '':'-outline'}" class="like__icon"></ion-icon>
                     </button>
                 </figure>
                 

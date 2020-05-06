@@ -4,9 +4,11 @@ import { elements, sortingDescending, renderLoader, clearLoader } from './views/
 import Init from './models/Init';
 import Search from './models/Search';
 import Autocomplete from './models/Autocomplete';
+import Likes from './models/Likes';
 import * as initView from './views/initView';
 import * as searchView from './views/searchView';
 import * as graphView from './views/graphView';
+import * as likesView from './views/likesView';
 
 // Global Data
 const state = {};
@@ -63,7 +65,12 @@ const controlSearch = async () => {
 
             if (state.search.country) {
                 // Render to UI
-                searchView.renderCountry(state.search.country, state.search.slug, state.search.dates);
+                searchView.renderCountry(
+                    state.search.country,
+                    state.search.slug,
+                    state.likes.isLiked(state.search.slug),
+                    state.search.dates
+                );
                 // Highlight Selected
                 initView.highlightSelected(slug);
 
@@ -114,7 +121,13 @@ const controlQuery = () => {
 // Control Date
 const controlDate = (event) => {
     const date = event.target.closest('.button__date').dataset.date;
-    searchView.renderCountry(state.search.country, state.search.slug, state.search.dates, date);
+    searchView.renderCountry(
+        state.search.country,
+        state.search.slug,
+        state.likes.isLiked(state.search.slug),
+        state.search.dates,
+        date
+    );
 };
 
 // Control Graph
@@ -127,12 +140,40 @@ const controlGraph = (event) => {
     graphView.renderResults(state.search.country, state.search.dates);
 };
 
+// Control Like
+const controlLike = () => {
+    console.log('Like');
+    if (!state.likes) state.likes = new Likes();
+    const currentSlug = state.search.slug;
+
+    // User has not yet liked current country
+    if (!state.likes.isLiked(currentSlug)) {
+        // Add like to state
+        const newLike = state.likes.addLike(state.init.countries, state.search.slug);
+        // Toggle like button
+        likesView.toggleLikeBtn(true);
+        // Add like to UI List
+        likesView.renderLike(newLike);
+        // User has liked current country
+    } else {
+        // Remove like to state
+        state.likes.deleteLike(state.search.slug);
+        // Toggle like button
+        likesView.toggleLikeBtn(false);
+        // Remove like to UI List
+        likesView.deleteLike(state.search.slug);
+    }
+    console.log(state.likes);
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+};
+
 // Control Country
 const controlCountry = (event) => {
     // Date Change button
     if (event.target.matches('.button__date,.button__date *')) controlDate(event);
 
     // Like Button
+    if (event.target.matches('.country__like,.country__like *')) controlLike();
 
     // Graph Button
     if (event.target.matches('.button__graph,.button__graph *')) controlGraph(event);
@@ -140,9 +181,18 @@ const controlCountry = (event) => {
     // Go Back
     if (event.target.matches('.button__go-back,.button__go-back *')) {
         graphView.changeLight();
-        searchView.renderCountry(state.search.country, state.search.slug, state.search.dates);
+        searchView.renderCountry(
+            state.search.country,
+            state.search.slug,
+            state.likes.isLiked(state.search.slug),
+            state.search.dates
+        );
     }
 };
+
+// Persistance of likes
+state.likes = new Likes();
+likesView.toggleLikeMenu(state.likes.getNumLikes());
 
 // Adding all the events
 const eventHandler = () => {
@@ -168,3 +218,6 @@ const init = () => {
     eventHandler();
 };
 init();
+
+// Testing
+window.state = state;

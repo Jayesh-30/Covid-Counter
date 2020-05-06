@@ -5,6 +5,8 @@ export const elements = {
     searchForm: document.querySelector('.search__form'),
     searchInput: document.querySelector('.search__form-field'),
     country: document.querySelector('.country'),
+    likesMenu : document.querySelector('.likes__hover'),
+    likesList : document.querySelector('.likes__list')
 };
 export const sortingDescending = (A, B) => B.TotalConfirmed - A.TotalConfirmed;
 
