@@ -74,7 +74,7 @@ body {
 }
 
 .container {
-    width: 80%;
+    width: 87.5%;
     margin: 4vw auto;
     background-color: var(--color-white);
     border-radius: 0.6rem;
@@ -407,7 +407,6 @@ body {
 .countries__name {
     display: block;
     color: var(--color-primary-dark);
-    /* font-size: 150%; */
     font-size: var(--font-size--small);
     font-weight: var(--font-weight--meduim);
     text-transform: uppercase;
@@ -706,6 +705,7 @@ Date Button
 
 .button__date,
 .button__graph {
+    font-size: var(--font-size--small);
     color: var(--color-white);
     background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
     border-radius: 2rem;
@@ -737,6 +737,7 @@ Date Button
 }
 
 .button__go-back {
+    font-size: var(--font-size--small);
     color: var(--color-white);
     background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
     border-radius: 2rem;
@@ -983,16 +984,46 @@ Scrollbar
 
 /* Media Queries */
 /* Big tablet to 1200px (widths smaller taht the 1140px row) */
-@media only screen and (max-width: 1200px) {}
+@media only screen and (max-width: 1200px) {
+    .container{
+    margin: 3vw auto;
+    width: 90%;
+    }
+    body,html{
+        font-size: 52.5%;
+    }
+}
 
 
 /* Small tablet to big tablet: from 768px to 1023px */
-@media only screen and (max-width: 1023px) {}
-
-
+@media only screen and (max-width: 1023px) {
+    .container{
+        margin: 1vw auto;
+        width: 97.5%;
+    }
+    body,html{
+        font-size: 40%;
+    }
+}
 
 /* Small phones to small tablets: from 481px to 767px */
-@media only screen and (max-width: 767px) {}
+@media only screen and (max-width: 767px) {
+    .container {
+        margin: 0 auto;
+        width: 100%;
+    }
+    body,html{
+        font-size: 35%;
+    }
+    .row{
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+    .col{
+        margin: 1rem auto;
+    }
+}
 
 
 

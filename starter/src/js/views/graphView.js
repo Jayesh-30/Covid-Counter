@@ -378,7 +378,7 @@ const generatePieChart = (country) => {
         ],
     };
     const options = {
-        cutoutPercentage: 77.5,
+        cutoutPercentage: 80,
         rotation: -0.5 * Math.PI,
         circumference: 2 * Math.PI,
         layout: {
