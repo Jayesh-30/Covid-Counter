@@ -333,6 +333,7 @@ body {
 
 /* Main */
 .main {
+    min-height: 70rem;
     margin: 0.1rem;
     display: flex;
     flex-direction: row;
