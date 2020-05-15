@@ -1,7 +1,7 @@
 import { elements } from '../views/base';
 import autoComplete from '../vendor/autoComplete';
 
-export default (autocomplete) => {
+export default autocomplete => {
     // Auto complete of input
     new autoComplete({
         data: {
@@ -23,7 +23,7 @@ export default (autocomplete) => {
         resultsList: {
             // Rendered results list object
             render: true,
-            container: (source) => {
+            container: source => {
                 source.setAttribute('class', 'search__list');
             },
             destination: elements.searchInput,
@@ -47,9 +47,9 @@ export default (autocomplete) => {
             result.innerHTML = 'No Results';
             document.querySelector('.search__list').appendChild(result);
         },
-        onSelection: (data) => {
+        onSelection: data => {
             elements.searchInput.value = data.selection.value;
-            elements.searchForm.submit();
+            // elements.searchForm.submit();
         },
     });
 };

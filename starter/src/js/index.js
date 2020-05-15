@@ -99,10 +99,14 @@ const controlPageButton = (event) => {
 };
 
 // Control Query
-const controlQuery = () => {
+const controlQuery = (event) => {
     // Getting input
+    event.preventDefault();
     const countryName = searchView.getInput();
 
+    // Prepare Ui for changes
+    searchView.clearList();
+    
     if (countryName) {
         const countrySlug = searchView.getSlug(state.init.countries, countryName);
 
@@ -205,7 +209,6 @@ window.addEventListener('load', () => {
 const eventHandler = () => {
     // Control Search Form
     elements.searchForm.addEventListener('submit', controlQuery);
-
     // Control event of hashchange and load
     ['hashchange', 'load'].forEach((event) => {
         window.addEventListener(event, controlSearch);

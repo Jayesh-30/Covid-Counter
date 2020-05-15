@@ -8,13 +8,18 @@ export const clearInput = () => (elements.searchInput.value = '');
 
 export const clearResults = () => (elements.country.innerHTML = '');
 
-export const renderCountry = (country, slug, isLiked ,dates, date = dates[dates.length - 1]) => {
+export const clearList = () => {
+    const ele = document.querySelector('.search__list');
+    if (ele) ele.innerHTML = '';
+};
+
+export const renderCountry = (country, slug, isLiked, dates, date = dates[dates.length - 1]) => {
     clearResults();
 
     let current, index;
     // Date will be always given
 
-    index = country.findIndex((cur) => cur.Date == date);
+    index = country.findIndex(cur => cur.Date == date);
 
     // At this moment index is available to us
     current = country[index];
@@ -28,7 +33,7 @@ export const renderCountry = (country, slug, isLiked ,dates, date = dates[dates.
                         <h3 class="country__name">${current.Country}</h3>
                     </div>
                     <button class="country__like">
-                        <ion-icon name="heart${isLiked ? '':'-outline'}" class="like__icon"></ion-icon>
+                        <ion-icon name="heart${isLiked ? '' : '-outline'}" class="like__icon"></ion-icon>
                     </button>
                 </figure>
                 
@@ -45,7 +50,9 @@ export const renderCountry = (country, slug, isLiked ,dates, date = dates[dates.
                         </li>
                         <li class="country__summary--item">
                             <ion-icon name="briefcase-sharp" class="list__icon list__icon--total"></ion-icon>
-                            <p>Confirmed Cases : <span id="countup--Confirmed">${formatNumber(current.Confirmed)}</span>  </p>
+                            <p>Confirmed Cases : <span id="countup--Confirmed">${formatNumber(
+                                current.Confirmed
+                            )}</span>  </p>
                         </li>
                         <li class="country__summary--item">
                             <ion-icon name="heart-dislike-sharp" class=" list__icon list__icon--death"></ion-icon>
@@ -90,14 +97,13 @@ export const renderCountry = (country, slug, isLiked ,dates, date = dates[dates.
     displayCount(current);
 };
 
-const displayCount = (current) => {
+const displayCount = current => {
     const options = {};
     const countup_Confirmed = new CountUp(document.getElementById('countup--Confirmed'), current.Confirmed);
     const countup_Deaths = new CountUp(document.getElementById('countup--Deaths'), current.Deaths);
     const countup_Recovered = new CountUp(document.getElementById('countup--Recovered'), current.Recovered);
     const countup_Active = new CountUp(document.getElementById('countup--Active'), current.Active);
 
-    
     countup_Confirmed.start();
     countup_Deaths.start();
     countup_Recovered.start();
@@ -105,6 +111,6 @@ const displayCount = (current) => {
 };
 
 export const getSlug = (countries, countryName) => {
-    const ele = countries.find((country) => country.Country === countryName);
+    const ele = countries.find(country => country.Country === countryName);
     if (ele) return ele.Slug;
 };

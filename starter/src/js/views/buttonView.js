@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements,getReadableDate } from './base';
 
 // type - prev or next
 const createPageButton = (page, type) => `
@@ -33,15 +33,15 @@ export const renderPageButtons = (total, page, resPerPage) => {
     if (markup) elements.countriesBtn.insertAdjacentHTML('afterbegin', markup);
 };
 
-export const createDatePrevButton = (dates,date) =>
-    `<button class="button__date button__date--prev" data-date  = ${dates[dates.indexOf(date)-1]}>
-            <span>Yesterday</span>
+export const createDatePrevButton = (dates, date) =>
+    `<button class="button__date button__date--prev" data-date  = ${dates[dates.indexOf(date) - 1]}>
+            <span>${getReadableDate(dates[dates.indexOf(date) - 1])}</span>
             <ion-icon name="chevron-back-circle-outline" class="date__icon"></ion-icon>
         </button>`;
 
-export const createDateNextButton = (dates,date) =>
-    `<button class="button__date button__date--next" data-date  = ${dates[dates.indexOf(date)+1]}>
-        <span>Tomorrow</span>
+export const createDateNextButton = (dates, date) =>
+    `<button class="button__date button__date--next" data-date  = ${dates[dates.indexOf(date) + 1]}>
+        <span>${getReadableDate(dates[dates.indexOf(date) + 1])}</span>
         <ion-icon name="chevron-forward-circle-outline" class="date__icon"></ion-icon>
     </button>`;
 
@@ -50,17 +50,13 @@ export const renderDateButtons = (country, dates, date) => {
     if (dates.length > 0) {
         // Only next buttons
         if (date === dates[0]) {
-            markup = createDateNextButton(dates,date);
+            markup = createDateNextButton(dates, date);
         }
-        else
         // Only prev buttons
-        if(date === dates[dates.length-1])
-        {
-            markup = createDatePrevButton(dates,date);
-        }
-        else
-        {
-            markup = `${createDatePrevButton(dates,date)}${createDateNextButton(dates,date)}`;
+        else if (date === dates[dates.length - 1]) {
+            markup = createDatePrevButton(dates, date);
+        } else {
+            markup = `${createDatePrevButton(dates, date)}${createDateNextButton(dates, date)}`;
         }
     }
     return markup;
