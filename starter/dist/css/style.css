@@ -8,6 +8,7 @@
     --color-grey-meduim: #ddd;
     --color-grey-dark: #555555;
     --color-white: rgb(255, 255, 255);
+    --color-black: rgb(0,0,0);
 
     --graph-background-dark: #060818;
     --graph-background-light: #0e1726;
@@ -98,6 +99,7 @@ body {
 .logo {}
 
 .logo__heading {
+    color: var(--color-black);
     padding: 0.5rem;
     margin: auto 2rem;
     font-size: var(--font-size--large);
@@ -757,6 +759,40 @@ Date Button
     padding: 0.5rem 1rem;
 }
 
+/* 
+Footer
+*/
+.footer{
+    padding: 0.5rem;
+    background-color: var(--color-grey-light);
+    color: var(--color-black);
+}
+
+.copyright{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.25rem;
+    font-size: var(--font-size--extrasmall);
+    font-weight: var(--font-weight--meduim);
+}
+
+.reserved{
+    flex-basis: 25%;
+    padding: 0.25rem;
+    text-align: center;
+}
+
+.created_by{
+    flex-basis: 15%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+.created_by span{
+    padding: 0.25rem;
+    padding-right: 1rem;
+}
 /* Graph */
 
 .row {
@@ -931,6 +967,11 @@ Icons
     fill: #777;
 }
 
+.create__icon{
+    fill: #de5246;
+    height: 2rem;
+    width: 2rem;
+}
 
 .date__icon {
     height: 2.75rem;

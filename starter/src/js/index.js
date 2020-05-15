@@ -106,7 +106,7 @@ const controlQuery = (event) => {
 
     // Prepare Ui for changes
     searchView.clearList();
-    
+
     if (countryName) {
         const countrySlug = searchView.getSlug(state.init.countries, countryName);
 
@@ -223,7 +223,7 @@ const eventHandler = () => {
 
 // Initialization of app
 const init = () => {
-    console.log('Application has been started');
+    console.log('New Application has been started');
     controlInit();
     eventHandler();
 };
